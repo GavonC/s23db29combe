@@ -8,7 +8,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var Tool = reauire("./models/tool");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var toolRouter = require('./routes/tool');
@@ -43,6 +43,19 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+//We can seed the collection if needed on server start
+async function recreateDB(){
+  await Tool.deleteMany();
+  let instance1 = new
+  Tool({tool_type:"saw", size:'small', cost:56.33});
+  instance1.save().then(doc=>{
+    console.log("first object saved")}
+  ).catch(err=>){
+    console.error(err)
+  });
+}
+let reseed = true; 
+if (reseed) {recreateDB();}
 module.exports = app;
 
 
