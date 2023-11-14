@@ -7,7 +7,9 @@ var Tool = require("./models/tool");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var toolRouter = require('./routes/tool');
+var resourceRouter = require('./routes/resource');
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/tool', toolRouter);
+app.use('/resource', resourceRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
