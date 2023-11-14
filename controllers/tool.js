@@ -1,6 +1,7 @@
 var tool = require('../models/tool');
 //list of all tools
-exports.tool_list = runction(req, res)
+
+exports.tool_list = function(req, res) 
 {
     res.send('NOT IMPLEMENTED: Tool list');
 };
