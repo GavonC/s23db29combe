@@ -1,10 +1,17 @@
 var tool = require('../models/tool');
 //list of all tools
 
-exports.tool_list = function(req, res) 
+exports.tool_list = async function(req, res) 
 {
-    res.send('NOT IMPLEMENTED: Tool list');
-};
+    try{
+        theTools = await tool.find();
+        res.send(theTools);
+    }
+    catch(err){
+        res.status(500);
+        res.send('{"error":${err}}');
+    }
+    };
 exports.tool_detail = function (req, res) {
     res.send('NOT IMPLEMENTED: tool create post');
 };
