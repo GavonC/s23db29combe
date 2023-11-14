@@ -1,8 +1,3 @@
-require('dotenv').config();
-const connectionString =
-process.env.MONGO_CON
-mongoose = require('mongoose');
-mongoose.connect(mongodb+srv://Gavon:<123>@cluster0.wbph7cr.mongodb.net/?retryWrites=true&w=majority);
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -50,12 +45,39 @@ async function recreateDB(){
   Tool({tool_type:"saw", size:'small', cost:56.33});
   instance1.save().then(doc=>{
     console.log("first object saved")}
-  ).catch(err=>){
+  ).catch(err=>{
     console.error(err)
   });
 }
 let reseed = true; 
 if (reseed) {recreateDB();}
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = "mongodb+srv://Gavon:<123>@cluster0.wbph7cr.mongodb.net/?retryWrites=true&w=majority";
+
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
+});
+
+async function run() {
+  try {
+    // Connect the client to the server	(optional starting in v4.7)
+    await client.connect();
+    // Send a ping to confirm a successful connection
+    await client.db("admin").command({ ping: 1 });
+    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+  } finally {
+    // Ensures that the client will close when you finish/error
+    await client.close();
+  }
+}
+run().catch(console.dir);
+
 module.exports = app;
 
 
