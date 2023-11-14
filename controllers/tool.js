@@ -24,3 +24,13 @@ exports.tool_delete = function(req, res) {
 exports.tool_update_put = function(req, res) {
     res.send('NOT IMPLEMENTED: tool update PUT' + req.params.id);
 };
+exports.tool_view_all_page = async function(req, res) {
+    try{
+        theTools=await tool.find();
+        res.render('tools',{titile: 'tools search results', results:theTools});
+    }
+    catch(err){
+        res.status(500);
+        res.send('{"error":${err}}');
+    }
+};
