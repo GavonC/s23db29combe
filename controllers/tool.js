@@ -16,11 +16,3 @@ exports.tool_delete = function(req, res) {
 exports.tool_update_put = function(req, res) {
     res.send('NOT IMPLEMENTED: tool update PUT' + req.params.id);
 };
-exports.api = function(req, res) {
-    res.write('[');
-    res.write('{"resource":"costumes",');
-    res.write(' "verbs":["GET","PUT", "DELETE"] ');
-    res.write('}');
-    res.write(']')
-    res.send();
-};
