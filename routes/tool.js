@@ -1,5 +1,5 @@
 var express = require('express');
-const tool_controllers=require('../controllers/tool');
+const tool_controller=require('../controllers/tool');
 var router = express.Router();
 
 /* GET home page. */
