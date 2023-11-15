@@ -7,7 +7,8 @@ var Tool = require("./models/tool");
 var mongoose = require('mongoose');
 
 require('dotenv').config();
-const connectionString = process.env.MONGO_CON;
+let connectionString = process.env.MONGO_CON;
+connectionString = 'mongodb+srv://Gavon:123@cluster0.wbph7cr.mongodb.net/?retryWrites=true&w=majority'
 mongoose.connect(connectionString);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connectionerror:'));
