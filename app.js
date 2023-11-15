@@ -49,7 +49,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/tool', toolRouter);
 app.use('/resource', resourceRouter);
-
+router.get('/tool/:id',tool_controller.tool_detail);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

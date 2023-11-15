@@ -1,3 +1,4 @@
+const { router } = require('../app');
 var tool = require('../models/tool');
 //list of all tools
 
@@ -12,8 +13,15 @@ exports.tool_list = async function(req, res)
         res.send('{"error":${err}}');
     }
     };
-exports.tool_detail = function (req, res) {
-    res.send('NOT IMPLEMENTED: tool create post');
+exports.tool_detail = async function (req, res) {
+    console.log("detail" +req.param.id)
+    try {
+        result = await tool.findById(req.params.id)
+        res.send(result)
+    } catch(error){
+        res.stats(500)
+        res.send('{"error": document for id${req.params.id} not found');
+    }
 };
 exports.tool_create_post = async function(req, res) {
     console.log(req.body)
