@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const toolSchema = mongoose.Schema ({
+const toolSchema = mongoose.Schema({
     tool_type: String,
     size: String,
     cost: Number

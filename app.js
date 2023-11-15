@@ -1,40 +1,40 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = "mongodb+srv://Gavon:<123>@cluster0.wbph7cr.mongodb.net/?retryWrites=true&w=majority";
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
-
-async function run() {
-  try {
-    // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-  }
-}
-run().catch(console.dir);
-
 var createError = require('http-errors');
 var path = require('path');
 var express = require('express');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var Tool = require("./models/tool");
+var mongoose = require('mongoose');
+
+require('dotenv').config();
+const connectionString = process.env.MONGO_CON;
+mongoose.connect(connectionString);
+
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'MongoDB connectionerror:'));
+db.once("open", function(){console.log("Connection to DB succeeded")});
+
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var toolRouter = require('./routes/tool');
 var resourceRouter = require('./routes/resource');
-var app = express();
 
+//We can seed the collection if needed on server start
+async function recreateDB(){
+  await Tool.deleteMany();
+  
+  let instance1 = new Tool({tool_type:"saw", size:'small', cost:56.33});
+  instance1.save().then(doc=>{
+    console.log("first object saved")}
+  ).catch(err=>{
+    console.error(err)
+  });
+}
+let reseed = true; 
+if (reseed) {recreateDB();}
+
+var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -50,6 +50,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/tool', toolRouter);
 app.use('/resource', resourceRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
@@ -66,20 +67,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-//We can seed the collection if needed on server start
-async function recreateDB(){
-  await Tool.deleteMany();
-  let instance1 = new
-  Tool({tool_type:"saw", size:'small', cost:56.33});
-  instance1.save().then(doc=>{
-    console.log("first object saved")}
-  ).catch(err=>{
-    console.error(err)
-  });
-}
-let reseed = true; 
-if (reseed) {recreateDB();}
-
 module.exports = app;
-
-
