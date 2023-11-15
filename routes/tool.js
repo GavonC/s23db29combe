@@ -5,3 +5,5 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', tool_controller.tool_view_all_page); 
 module.exports = router;
+router.get('/tool/:id',tool_controller.tool_detail);
+

@@ -34,7 +34,6 @@ let reseed = true;
 if (reseed) {recreateDB();}
 
 var app = express();
-toolRouter.get('/tool/:id',tool_controller.tool_detail);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
