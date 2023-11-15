@@ -23,6 +23,7 @@ exports.tool_detail = async function (req, res) {
         res.send('{"error": document for id${req.params.id} not found');
     }
 };
+router.get('/tool/:id',tool_controller.tool_detail);
 exports.tool_create_post = async function(req, res) {
     console.log(req.body)
     let document = new tool();
