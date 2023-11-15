@@ -9,9 +9,7 @@ var mongoose = require('mongoose');
 require('dotenv').config();
 const connectionString = process.env.MONGO_CON;
 mongoose.connect(connectionString);
-
 var db = mongoose.connection;
-
 db.on('error', console.error.bind(console, 'MongoDB connectionerror:'));
 db.once("open", function(){console.log("Connection to DB succeeded")});
 
