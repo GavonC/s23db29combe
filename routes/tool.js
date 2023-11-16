@@ -9,4 +9,4 @@ router.get('/tool/:id',tool_controller.tool_detail);
 router.get('/detail', tool_controller.tool_view_one_Page);
 router.get('/create',tool_controller.tool_create_Page);
 router.get('/update', tool_controller.tool_update_Page);
-router.get('/delete', tool_controller.tool_delete_Page);
+router.get('/delete', tool_controller.tool_delete_page);
