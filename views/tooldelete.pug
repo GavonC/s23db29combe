@@ -1,16 +1,16 @@
-extends layout
+extends layout 
 
 block content 
-    h1 = title 
+    h1=title 
 
     if(toShow == null)
-        h2 No instance to delete
-    else 
+        h2 No instace to delete 
+    else
     - let toolid=toShow._id 
-    - let tool_type=toShow.tool_type 
+    - let tool_type=toShow.tool_type
     - let toolcost=toShow.cost 
     - let toolsize=toShow.size 
-    -let actionid="/resource/tool/" +toolid 
+    - let actionid="/resource/tool/" + toolid 
     script 
         let actionid = "#{actionid}"
             div 
