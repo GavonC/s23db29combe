@@ -1,0 +1,24 @@
+extends layout 
+
+block content 
+    h1=title 
+
+    - let toolid=toShow._id 
+    - let tool_type=toShow.tool_type
+    - let toolcost=toShow.cost 
+    - let toolsize=toShow.size 
+    div 
+        div.row 
+            div(class='toolAttr mr-3') tool ID is: 
+            div #{toolid}
+        div.row 
+            div(class='toolAttr mr-3') tool type is: 
+            div #{tool_type} 
+        div.row
+            div(class='toolAttr mr-3') tool size is: 
+            div #{toolsize} 
+        div.row  
+            div(class='toolAttr mr-3') tool cost is: 
+            div #{toolcost} 
+        div.row
+    div 
