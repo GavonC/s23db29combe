@@ -89,3 +89,13 @@ exports.tool_view_one_Page = async function(req, res){
         res.send('{"error":"${err}"}');
     }
 };
+exports.tool_create_Page = function(req, res){
+    console.log("create view")
+    try{
+        res.render('toolcreate',{title:'tool create'});
+    }
+    catch(err){
+        res.status(500)
+        res.send('{"error":"${err}"}');
+    }
+};

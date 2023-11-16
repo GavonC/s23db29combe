@@ -1,0 +1,31 @@
+extends layout 
+block content   
+    h1=title
+    
+    form(id='ToolForm',action="/resource/tool",method="POST")
+        div.form-group 
+            label.toolAttr(for='tool_type') tool type 
+            input#tool_type(type='text',name='tool_type')
+        div.form-group
+            label.toolAttr(for='size') tool size 
+            input#size(type='text',name='size')
+        div.form-group 
+            label.toolAttr(for='cost') tool cost 
+            input#cost(type='text',name='cost')
+        input(type="submit")  
+    
+    script.
+
+        document.forms['toolForm'].addEventListener('submit',(event) => {
+            event.preventDefault();
+            fetch(event.target.action,{
+                method:'POST',
+                body:new URLSearchParams(new FormData(event.target))
+            }).then((resp) => {
+                return resp.json();
+            }).then((body) => {
+                alert("save succeded")
+            }).catch((error) => {
+                alert("Save failed" + error)
+            });
+        });
