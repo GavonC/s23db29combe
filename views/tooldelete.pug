@@ -1,0 +1,48 @@
+extends layout 
+block content 
+    h1 = title 
+    if(toShow==null)
+        h2 No instance to delete
+    else 
+    - let toolid=toShow._id 
+    - let tool_type=toShow.tool_type 
+    - let toolcost=toShow.cost 
+    - let toolsize=toShow.size 
+    -let actionid="/resource/tool/" +toolid 
+    script 
+        let actionid = "#{actionid}"
+        div 
+            div.row 
+                div(class='toolAttr mr-3') tool ID is: 
+                div #{toolid} 
+            div.row
+                div(class='toolAttr mr-3') tool type is: 
+                div #{tool_type} 
+            div.row
+                div(class='toolAttr mr-3') tool size is: 
+                div #{toolsize} 
+            div.row
+                div(class='toolAttr mr-3') tool cost is: 
+                div #{toolcost} 
+            
+        button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete 
+        button(class="btn btn-secondary m-2" onclick="cancel()") Cancel 
+
+    script. 
+        function cancel() {
+            window.location.href='/tool'
+        }
+    script. 
+        function deleteOnid(){
+            console.log("starting delete")
+            fetch(actionid,{
+                method: 'DELETE'
+            })then((resp) =>{
+                return resp.json();
+            })then((body) => {
+                alert("delete succeded")
+                window.location.href='/tool'
+            })catch((error) => {
+                alert("delete failed" +error)
+            });
+        }

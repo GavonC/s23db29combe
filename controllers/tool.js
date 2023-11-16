@@ -110,3 +110,15 @@ exports.tool_update_Page = async function(req, res){
         res.send('{"error":"${err}"}');
     }
 };
+
+exports.tool_delete_page = async function(req, res){
+    console.log("delete view for id" + req.query.id)
+    try{
+        result = await tool.findById(req.query.id)
+        res.render('tooldelete',{title:'tool delete', toShow: result});
+    }
+    catch(err){
+        res.status(500)
+        res.send('{"error":"${err}"}');
+    }
+};
