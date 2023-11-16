@@ -57,8 +57,7 @@ exports.tool_update_put = async function(req, res) {
         res.send('{"error": ${err}: Update for id${req.params.id}failed');
     }
 };
-if(req.body.checkboxsale) toUpdate.sale=true;
-else toUpdate.same = false;
+
 exports.tool_view_all_page = async function(req, res) {
     try{
         theTools=await tool.find();
