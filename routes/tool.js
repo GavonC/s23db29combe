@@ -6,4 +6,3 @@ var router = express.Router();
 router.get('/', tool_controller.tool_view_all_page); 
 module.exports = router;
 router.get('/tool/:id',tool_controller.tool_detail);
-

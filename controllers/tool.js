@@ -41,9 +41,24 @@ exports.tool_create_post = async function(req, res) {
 exports.tool_delete = function(req, res) {
     res.send('NOT IMPLEMENTED: costume delete DELETE ' + req.params.id);
 };
-exports.tool_update_put = function(req, res) {
-    res.send('NOT IMPLEMENTED: tool update PUT' + req.params.id);
+exports.tool_update_put = async function(req, res) {
+    console.log('update on id ${req.params.id} with body ${JSON.stringify(req.body)}')
+    try {
+        let toUpdate = await tool.findById(req.params.id)
+        if(req.body.tool_type)
+            toUpdate.tool_type=req.body.tool_type;
+        if(req.body.cost) toUpdate.cost = req.body.cost;
+        if(req.body.size) toUpdate.size = req.body.size;
+        let result = await toUpdate.save();
+        console.log("sucess " + result)
+        res.send(result)
+    } catch(err){
+        res.status(500)
+        res.send('{"error": ${err}: Update for id${req.params.id}failed');
+    }
 };
+if(req.body.checkboxsale) toUpdate.sale=true;
+else toUpdate.same = false;
 exports.tool_view_all_page = async function(req, res) {
     try{
         theTools=await tool.find();
