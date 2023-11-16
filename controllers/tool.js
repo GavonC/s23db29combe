@@ -99,3 +99,14 @@ exports.tool_create_Page = function(req, res){
         res.send('{"error":"${err}"}');
     }
 };
+exports.tool_update_Page = async function(req, res){
+    console.log("update view for item " +req.query.id)
+    try{
+        let result = await tool.findById(req.query.id)
+        res.render('toolupdate',{title:'Tool Update', toShow:result});
+    }
+    catch(err){
+        res.status(500)
+        res.send('{"error":"${err}"}');
+    }
+};
