@@ -66,5 +66,3 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-if(req.body.checkboxsale) toUpdate.sale=true;
-else toUpdate.same = false;
