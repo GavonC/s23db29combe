@@ -1,0 +1,40 @@
+extends layout 
+block content   
+    h1=title
+    
+    - let toolid=toShow._id 
+    - let tool_type=toShow.tool_type
+    - let toolcost=toShow.cost 
+    - let toolsize=toShow.size 
+    
+    div.row(class='mb-2')
+        div.mr01 ID is 
+        div #{toolid} 
+    - let actionid = "/resource/id/" + toolid
+    form(id='ToolForm',action=actionid, method="PUT")
+        div.form-group 
+            label.toolAttr(for='tool_type') tool type 
+            input#tool_type(type='text',name='tool_type', value = tool_type)
+        div.form-group
+            label.toolAttr(for='size') tool size 
+            input#size(type='text',name='size', value = toolsize)
+        div.form-group 
+            label.toolAttr(for='cost') tool cost 
+            input#cost(type='text',name='cost', value = toolcost)
+        input(type="submit")  
+    
+    script.
+
+        document.forms['toolForm'].addEventListener('submit',(event) => {
+            event.preventDefault();
+            fetch(event.target.action,{
+                method:'PUT',
+                body:new URLSearchParams(new FormData(event.target))
+            }).then((resp) => {
+                return resp.json();
+            }).then((body) => {
+                alert("save succeded")
+            }).catch((error) => {
+                alert("Save failed" + error)
+            });
+        });
