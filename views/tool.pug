@@ -2,6 +2,15 @@ extends layout
 
 block content
   h1= title
-  p  #{title}
-- 
-let items = results;
+  - let items = results;
+  div(class="container-fluid")
+    div(class="row")
+      each item in items 
+        - let destination = 'dispatch(\"/tools/update?id=${item._id}\")'
+        div(clas="row-sm-2", class="m-1") Item#{item.tol_type}(#{item.size}) is#{item.cost} 
+          button.btn(class="btn-primary m1-1", onclick=destination) Update 
+  
+  script. 
+    function dispatch(path){
+      window.location.href=path
+    }
