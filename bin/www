@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('f23wb29combe:server');
 var http = require('http');
+var Account = require('/models/account')
 
 /**
  * Get port from environment and store in Express.
