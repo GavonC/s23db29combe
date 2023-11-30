@@ -2,6 +2,8 @@
 //use the existing connection
 //the account model
 var Account = require('../models/account');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 passport.use(new LocalStrategy(Account.authenticate()));
 passport.serializeUser(Account.serializeUser());
