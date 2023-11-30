@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+    .container 
+        h1 = title 
+        h2 = message 
+        br
+        from(role='form', action="/register",method="post", style='max-width:300px;')
+            .form-group 
+                input.form-control(type='text', name="username", placeholder='enter username')
+            .form-group 
+                input.form-control(type='password', name="password", placeholder='password')
+            button.btn.btn-default(type='submit') Submit 
+            a(href='/')
+                button.btn.btn-primary(type="button") Cancel 

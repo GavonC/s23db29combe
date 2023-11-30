@@ -1,9 +1,55 @@
 var express = require('express');
+var passport = require('passport');
 var router = express.Router();
+var account = require('../models/account');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Tool App', user : req.user });
 });
 
+router.get('/register', function(req, res){
+  res.render('register', {title: 'tool App Registration'});
+});
+
+router.post('/register', function(req, res){
+  account.findOne({username : req.body.username})
+    .then(function (user){
+      if(user != null ){
+        console.log("exists " + req.body.username)
+        return res.render('register', {title: 'Registration',
+      message: 'existing User', account : req.body.username})
+      }
+      let newAccount = new Account ({ username : req.body.username});
+      Account.register(newAccount, req.body.password, function (err, user){
+        if (err){
+          console.log("db creation issue" +err)
+          return res.render('register', {title: 'registration',
+            message: 'access error', account: req.body.username})
+        }
+      })
+      console.log('sucess, redirect');
+      res.redirect('/');
+    })
+    .catch(function (err){
+      return res.render('register', { title: 'Registration',
+        message: 'registration error', account : req.body.username})
+    })
+});
+router.get('/login', function(req, res) {
+  res.render('login', {title: 'tool app login', user : req.user});
+});
+
+router.post('/login', passport.authenticate('local'), function(req,res){
+  res.redirect('/');
+});
+router.get('/logout', function(req, res){
+  req.logout(function(err){
+    if (err) { return next(err);}
+    res.redirect('/');
+  });
+});
+router.get('/ping', function(req, res){
+  res.status(200).send("pong!");
+});
 module.exports = router;
