@@ -16,6 +16,9 @@ const accountSchema = new Schema({
     username: String,
     password: String
 });
+accountSchema.methods.authenticate = function(local){
+    return this.local ===local;
+}
 
 accountSchema.plugin(passportLocalMongoose);
 
