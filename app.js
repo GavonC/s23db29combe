@@ -78,7 +78,7 @@ app.use(function(err, req, res, next) {
 passport.use(new LocalStrategy(
   function (username, password, done) {
     account.findOne({ username: username})
-      .then(function(user){
+      .then(function (user){
         if (err) { return done(err); }
         if (!user){
           return done(null, false, {message: 'Incorrect username.'});
