@@ -7,6 +7,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var Tool = require("./models/tool");
 var mongoose = require('mongoose');
+var Account = require("./models/account");
 
 require('dotenv').config();
 let connectionString = process.env.MONGO_CON;
