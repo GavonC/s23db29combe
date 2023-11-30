@@ -23,7 +23,7 @@ router.post('/register', function(req, res){
       let newAccount = new Account ({ username : req.body.username});
       Account.register(newAccount, req.body.password, function (err, user){
         if (err){
-          console.log("db creation issue" +err)
+          console.log("db creation issue" + err)
           return res.render('register', {title: 'registration',
             message: 'access error', account: req.body.username})
         }
